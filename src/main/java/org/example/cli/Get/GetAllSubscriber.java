@@ -13,17 +13,17 @@ public class GetAllSubscriber implements Command {
 
     @Override
     public void execute() {
-        System.out.println("\n--- ALL SUBSCRIBERS (SORTED) ---");
+        System.out.println("\n--- Все абоненты ---");
         List<Subscriber> subscribers = subscriberService.findAllSorted();
 
         if (subscribers.isEmpty()) {
-            System.out.println("No subscribers found.");
+            System.out.println("Абонентов нет");
             return;
         }
 
         for (int i = 0; i < subscribers.size(); i++) {
             Subscriber subscriber = subscribers.get(i);
-            System.out.printf("%d. %s %s - Phones: %s%n",
+            System.out.printf("%d. %s %s - Телефон: %s%n",
                     i + 1,
                     subscriber.getFirstName(),
                     subscriber.getLastName(),
@@ -33,27 +33,6 @@ public class GetAllSubscriber implements Command {
 
     @Override
     public String getTitle() {
-        return "Show all subscribers";
+        return "Показать всех абонентов";
     }
 }
-
-/*import org.example.cli.Command;
-
-public class GetAllSubscriber implements Command {
-    // поле с сервисом
-
-    public GetAllSubscriber() {
-        //объявление сервиса
-    }
-
-    @Override
-    public void execute() {
-        //вызов метода из сервиса
-    }
-
-    @Override
-    public String getCommandName() {
-        return "Get all departments";
-    }
-}
-*/

@@ -19,24 +19,24 @@ public class FindByPhone implements Command {
 
     @Override
     public void execute() {
-        System.out.println("\n--- FIND BY PHONE NUMBER ---");
-        String phone = readString("Enter phone number: ");
+        System.out.println("\n--- Найти по номеру телефона ---");
+        String phone = readString("Введите номер телефона: ");
 
         Optional<Subscriber> subscriber = subscriberService.findByPhoneNumber(phone);
 
         if (subscriber.isPresent()) {
             Subscriber s = subscriber.get();
-            System.out.printf("Found: %s %s - Phones: %s%n",
+            System.out.printf("Найден: %s %s - телефон: %s%n",
                     s.getFirstName(),
                     s.getLastName(),
                     String.join(", ", s.getPhoneNumbers()));
         } else {
-            System.out.println("No subscriber with phone number '" + phone + "' found.");
+            System.out.println("Нет абонента с таким номером " + phone);
         }
     }
 
     @Override
     public String getTitle() {
-        return "Find by phone number";
+        return "Найти по номеру телефона";
     }
 }

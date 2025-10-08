@@ -11,8 +11,3 @@ public interface SubscriberService extends Service<Subscriber, Long> {
     Subscriber addPhoneNumber(Long subscriberId, String phoneNumber);
     Subscriber removePhoneNumber(Long subscriberId, String phoneNumber);
 }
-/*
-public interface SubscriberService extends Service<Subscriber, Integer> {
-    // какие методы должен реализовывать сервис этой сущности додумаете сами
-}
-*/

@@ -19,7 +19,7 @@ public class DeleteSubscriber implements Command {
                 scanner.nextLine(); // важно!
                 return number;
             } catch (Exception e) {
-                System.out.println("Invalid number! Please try again.");
+                System.out.println("неправильный номер. поробуйте еще раз");
                 scanner.nextLine();
             }
         }
@@ -27,28 +27,28 @@ public class DeleteSubscriber implements Command {
 
     @Override
     public void execute() {
-        System.out.println("\n--- DELETE SUBSCRIBER ---");
-        Long id = readLong("Enter subscriber ID to delete: ");
+        System.out.println("\n--- Удалить абонента ---");
+        Long id = readLong("Введите ID абонента для удаления: ");
 
         Optional<?> subscriber = subscriberService.findById(id);
         if (subscriber.isEmpty()) {
-            System.out.println("Subscriber with ID " + id + " not found.");
+            System.out.println("Абонент с ID " + id + " не найден.");
             return;
         }
 
-        System.out.print("Are you sure you want to delete this subscriber? (y/n): ");
+        System.out.print("Вы уверены что хотите удалить абонента ? (y/n): ");
         String confirmation = scanner.nextLine().trim().toLowerCase();
 
         if (confirmation.equals("y") || confirmation.equals("yes")) {
             subscriberService.delete(id);
-            System.out.println("Subscriber deleted successfully.");
+            System.out.println("Абонент успешно удален.");
         } else {
-            System.out.println("Deletion cancelled.");
+            System.out.println("Отмена удаления.");
         }
     }
 
     @Override
     public String getTitle() {
-        return "Delete subscriber";
+        return "Удалить абонента";
     }
 }

@@ -16,12 +16,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // Инициализация зависимостей
         SubscriberRepository repository = new SubscriberRepositoryInMemImpl();
         SubscriberService service = new SubscriberServiceImpl(repository);
         Scanner scanner = new Scanner(System.in);
 
-        // Создание команд меню
         List<Command> commands = Arrays.asList(
                 new AddSubscriber(service, scanner),
                 new GetAllSubscriber(service),
@@ -31,7 +29,6 @@ public class Main {
                 new DeleteSubscriber(service, scanner)
         );
 
-        // Запуск меню
         Menu menu = new Menu(commands, scanner);
         menu.show();
 

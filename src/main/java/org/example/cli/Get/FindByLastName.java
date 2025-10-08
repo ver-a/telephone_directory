@@ -19,19 +19,19 @@ public class FindByLastName implements Command {
 
     @Override
     public void execute() {
-        System.out.println("\n--- FIND BY LAST NAME ---");
-        String lastName = readString("Enter last name: ");
+        System.out.println("\n--- Найти по фамилии ---");
+        String lastName = readString("Введите фамилию: ");
 
         List<Subscriber> subscribers = subscriberService.findByLastName(lastName);
 
         if (subscribers.isEmpty()) {
-            System.out.println("No subscribers with last name '" + lastName + "' found.");
+            System.out.println("Нет абонента с такой фамилией '" + lastName);
             return;
         }
 
-        System.out.println("Found " + subscribers.size() + " subscriber(s):");
+        System.out.println("Найден " + subscribers.size() + " абонент(ы):");
         for (Subscriber subscriber : subscribers) {
-            System.out.printf("- %s %s - Phones: %s%n",
+            System.out.printf("- %s %s - Телефон: %s%n",
                     subscriber.getFirstName(),
                     subscriber.getLastName(),
                     String.join(", ", subscriber.getPhoneNumbers()));
@@ -40,6 +40,6 @@ public class FindByLastName implements Command {
 
     @Override
     public String getTitle() {
-        return "Find by last name";
+        return "Найти по фамилии";
     }
 }

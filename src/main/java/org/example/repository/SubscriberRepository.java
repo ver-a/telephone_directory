@@ -9,10 +9,3 @@ public interface SubscriberRepository extends Repository<Subscriber, Long> {
     Optional<Subscriber> findByPhoneNumber(String phoneNumber);
     List<Subscriber> findAllSorted();
 }
-
-/*
-public interface SubscriberRepository extends Repository<Subscriber, Integer>{
-    Subscriber getDepartmentByName(String name);
-
-}
-*/

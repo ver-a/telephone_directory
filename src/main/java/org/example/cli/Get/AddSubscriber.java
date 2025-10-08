@@ -17,25 +17,12 @@ public class AddSubscriber implements Command {
         return scanner.nextLine().trim();
     }
 
-    private Long readLong(String prompt) {
-        while (true) {
-            try {
-                System.out.print(prompt);
-                Long number = scanner.nextLong();
-                scanner.nextLine(); // важно!
-                return number;
-            } catch (Exception e) {
-                System.out.println("Invalid number! Please try again.");
-                scanner.nextLine();
-            }
-        }
-    }
     @Override
     public void execute() {
-        System.out.println("\n--- ADD NEW SUBSCRIBER ---");
+        System.out.println("\n--- Добавить нового абонента ---");
 
-        String firstName = readString( "Enter first name: ");
-        String lastName = readString("Enter last name: ");
+        String firstName = readString( "Введите имя: ");
+        String lastName = readString("Введите фамилию: ");
 
         Subscriber subscriber = new Subscriber();
         subscriber.setFirstName(firstName);
@@ -43,23 +30,23 @@ public class AddSubscriber implements Command {
         subscriber.setPhoneNumbers(new ArrayList<>());
 
         // Добавление телефонных номеров (до 3-х)
-        System.out.println("Add phone numbers (max 3, leave empty to finish):");
+        System.out.println("Добавте номер телефона (max 3, оставьте пустым если нет):");
         for (int i = 0; i < 3; i++) {
-            String phone = readString("Phone " + (i + 1) + ": ");
+            String phone = readString("Телефон " + (i + 1) + ": ");
             if (phone.isEmpty()) break;
             subscriber.addPhoneNumber(phone);
         }
 
         try {
             Subscriber saved = subscriberService.create(subscriber);
-            System.out.println("Subscriber added successfully with ID: " + saved.getId());
+            System.out.println("Абонент успешно добавлен с номером: " + saved.getId());
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Ошибка: " + e.getMessage());
         }
     }
 
     @Override
     public String getTitle() {
-        return "Add new subscriber";
+        return "Добавить нового абонента";
     }
 }
