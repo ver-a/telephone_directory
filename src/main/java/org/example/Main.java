@@ -22,7 +22,7 @@ public class Main {
 
         List<Command> commands = Arrays.asList(
                 new AddSubscriber(service, scanner),
-                new GetAllSubscriber(service),
+                new GetAllSubscriber(service, scanner),
                 new GetSubscriberById(service, scanner),
                 new FindByLastName(service, scanner),
                 new FindByPhone(service, scanner),

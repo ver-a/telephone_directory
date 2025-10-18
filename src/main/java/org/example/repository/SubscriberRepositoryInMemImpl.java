@@ -1,11 +1,10 @@
 package org.example.repository;
 
 import org.example.entities.Subscriber;
-import lombok.RequiredArgsConstructor;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
-@RequiredArgsConstructor
+
 public class SubscriberRepositoryInMemImpl implements SubscriberRepository {
     private final Map<Long, Subscriber> storage = new HashMap<>();
     private final AtomicLong currentId = new AtomicLong(1);

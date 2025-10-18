@@ -3,11 +3,10 @@ package org.example.cli.Get;
 import org.example.cli.Command;
 import org.example.entities.Subscriber;
 import org.example.service.SubscriberService;
-import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.Scanner;
 
-@RequiredArgsConstructor
+
 public class FindByLastName implements Command {
     private final SubscriberService subscriberService;
     private final Scanner scanner;
@@ -15,6 +14,10 @@ public class FindByLastName implements Command {
     private String readString(String prompt) {
         System.out.print(prompt);
         return scanner.nextLine().trim();
+    }
+    public FindByLastName(SubscriberService subscriberService, Scanner scanner) {
+        this.subscriberService = subscriberService;
+        this.scanner = scanner;
     }
 
     @Override

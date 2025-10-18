@@ -1,15 +1,17 @@
 package org.example.service;
 
 import org.example.entities.Subscriber;
-import java.util.List;
 import org.example.repository.SubscriberRepository;
-import lombok.RequiredArgsConstructor;
-
+import java.util.List;
 import java.util.Optional;
 
-@RequiredArgsConstructor
 public class SubscriberServiceImpl implements SubscriberService {
     private final SubscriberRepository repository;
+
+    // Конструктор вместо @RequiredArgsConstructor
+    public SubscriberServiceImpl(SubscriberRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public Subscriber create(Subscriber subscriber) {

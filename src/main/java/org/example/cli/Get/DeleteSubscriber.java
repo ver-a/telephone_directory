@@ -2,14 +2,18 @@ package org.example.cli.Get;
 
 import org.example.cli.Command;
 import org.example.service.SubscriberService;
-import lombok.RequiredArgsConstructor;
 import java.util.Optional;
 import java.util.Scanner;
 
-@RequiredArgsConstructor
+
 public class DeleteSubscriber implements Command {
     private final SubscriberService subscriberService;
     private final Scanner scanner;
+
+    public DeleteSubscriber(SubscriberService subscriberService, Scanner scanner) {
+        this.subscriberService = subscriberService;
+        this.scanner = scanner;
+    }
 
     private Long readLong(String prompt) {
         while (true) {

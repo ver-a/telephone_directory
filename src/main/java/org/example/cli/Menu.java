@@ -1,13 +1,16 @@
 package org.example.cli;
 
-import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.Scanner;
 
-@RequiredArgsConstructor
 public class Menu {
     private final List<Command> commands;
     private final Scanner scanner;
+
+    public Menu(List<Command> commands, Scanner scanner) {
+        this.commands = commands;
+        this.scanner = scanner;
+    }
 
     public void show() {
         while (true) {
@@ -34,7 +37,7 @@ public class Menu {
                 }
             } catch (Exception e) {
                 System.out.println("Invalid input! Please enter a number.");
-                scanner.nextLine();
+                scanner.nextLine(); // clear invalid input
             }
         }
     }

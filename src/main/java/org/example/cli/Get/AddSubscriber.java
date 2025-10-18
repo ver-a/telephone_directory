@@ -3,14 +3,18 @@ package org.example.cli.Get;
 import org.example.cli.Command;
 import org.example.entities.Subscriber;
 import org.example.service.SubscriberService;
-import lombok.RequiredArgsConstructor;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-@RequiredArgsConstructor
+
 public class AddSubscriber implements Command {
     private final SubscriberService subscriberService;
     private final Scanner scanner;
+
+    public AddSubscriber(SubscriberService subscriberService, Scanner scanner) {
+        this.subscriberService = subscriberService;
+        this.scanner = scanner;
+    }
 
     private String readString(String prompt) {
         System.out.print(prompt);

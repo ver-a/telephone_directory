@@ -4,12 +4,18 @@ package org.example.cli.Get;
 import org.example.cli.Command;
 import org.example.entities.Subscriber;
 import org.example.service.SubscriberService;
-import lombok.RequiredArgsConstructor;
-import java.util.List;
 
-@RequiredArgsConstructor
+import java.util.List;
+import java.util.Scanner;
+
+
 public class GetAllSubscriber implements Command {
     private final SubscriberService subscriberService;
+
+
+    public GetAllSubscriber(SubscriberService subscriberService, Scanner scanner) {
+        this.subscriberService = subscriberService;
+    }
 
     @Override
     public void execute() {
