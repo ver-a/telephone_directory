@@ -35,3 +35,6 @@ public class Main {
         scanner.close();
     }
 }
+//d:
+//cd D:\taskJAVA\telephone_directory
+//mvn compile exec:java
