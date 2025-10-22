@@ -9,7 +9,6 @@ public class Subscriber {
     private String lastName;
     private List<String> phoneNumbers = new ArrayList<>();
 
-    // Конструкторы
     public Subscriber() {}
 
     public Subscriber(Long id, String firstName, String lastName) {
@@ -18,7 +17,6 @@ public class Subscriber {
         this.lastName = lastName;
     }
 
-    // Геттеры и сеттеры
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -35,7 +33,7 @@ public class Subscriber {
         if (phoneNumbers.size() < 3) {
             phoneNumbers.add(number);
         } else {
-            throw new IllegalStateException("Cannot have more than 3 phone numbers");
+            throw new IllegalStateException("Не может быть больше 3 телефонных номеров");
         }
     }
 

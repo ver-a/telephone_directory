@@ -14,29 +14,29 @@ public class Menu {
 
     public void show() {
         while (true) {
-            System.out.println("\n=== PHONE DIRECTORY ===");
+            System.out.println("\n=== ТЕЛЕФОННЫЙ СПРАВОЧНИК ===");
             for (int i = 0; i < commands.size(); i++) {
                 System.out.println((i + 1) + ". " + commands.get(i).getTitle());
             }
-            System.out.println("0. Exit");
-            System.out.print("Choose option: ");
+            System.out.println("0. Выход");
+            System.out.print("Выберите опцию: ");
 
             try {
                 int choice = scanner.nextInt();
                 scanner.nextLine(); // consume newline
 
                 if (choice == 0) {
-                    System.out.println("Goodbye!");
+                    System.out.println("До свидания!");
                     break;
                 }
 
                 if (choice > 0 && choice <= commands.size()) {
                     commands.get(choice - 1).execute();
                 } else {
-                    System.out.println("Invalid option!");
+                    System.out.println("Неверная опция!");
                 }
             } catch (Exception e) {
-                System.out.println("Invalid input! Please enter a number.");
+                System.out.println("Неверный ввод! Пожалуйста, введите число.");
                 scanner.nextLine(); // clear invalid input
             }
         }

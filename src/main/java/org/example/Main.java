@@ -1,6 +1,5 @@
 package org.example;
 
-// Импорты команд из папки Get
 import org.example.cli.Get.*;
 
 import org.example.cli.Command;

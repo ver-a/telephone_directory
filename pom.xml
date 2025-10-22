@@ -21,7 +21,7 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            <!--  Плагин для запуска через mvn  -->
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>

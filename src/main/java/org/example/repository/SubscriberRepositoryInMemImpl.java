@@ -6,57 +6,75 @@ import java.util.concurrent.atomic.AtomicLong;
 
 
 public class SubscriberRepositoryInMemImpl implements SubscriberRepository {
-    private final Map<Long, Subscriber> storage = new HashMap<>();
-    private final AtomicLong currentId = new AtomicLong(1);
+    private final Map<Long, Subscriber> subscribers = new HashMap<>();
+    private long nextId = 1;
 
     @Override
     public Subscriber save(Subscriber subscriber) {
         if (subscriber.getId() == null) {
-            subscriber.setId(currentId.getAndIncrement());
+            subscriber.setId(nextId);
+            nextId++;
         }
-        storage.put(subscriber.getId(), subscriber);
+        subscribers.put(subscriber.getId(), subscriber);
         return subscriber;
     }
 
     @Override
     public void delete(Long id) {
-        storage.remove(id);
+        subscribers.remove(id);
     }
 
     @Override
     public Optional<Subscriber> findById(Long id) {
-        return Optional.ofNullable(storage.get(id));
+        Subscriber subscriber = subscribers.get(id);
+        return Optional.ofNullable(subscriber);
     }
 
     @Override
     public List<Subscriber> findAll() {
-        return new ArrayList<>(storage.values());
+        return new ArrayList<>(subscribers.values());
     }
 
     @Override
     public List<Subscriber> findByLastName(String lastName) {
-        return storage.values().stream()
-                .filter(s -> s.getLastName().equalsIgnoreCase(lastName))
-                .toList();
+        List<Subscriber> result = new ArrayList<>();
+        for (Subscriber subscriber : subscribers.values()) {
+            if (subscriber.getLastName().equalsIgnoreCase(lastName)) {
+                result.add(subscriber);
+            }
+        }
+        return result;
     }
 
     @Override
     public Optional<Subscriber> findByPhoneNumber(String phoneNumber) {
-        return storage.values().stream()
-                .filter(s -> s.getPhoneNumbers().contains(phoneNumber))
-                .findFirst();
+        for (Subscriber subscriber : subscribers.values()) {
+            if (subscriber.getPhoneNumbers().contains(phoneNumber)) {
+                return Optional.of(subscriber);
+            }
+        }
+        return Optional.empty();
     }
 
     @Override
     public List<Subscriber> findAllSorted() {
-        return storage.values().stream()
-                .sorted((s1, s2) -> {
-                    int nameCompare = s1.getFullName().compareTo(s2.getFullName());
-                    if (nameCompare != 0) return nameCompare;
-                    return s1.getPhoneNumbers().toString()
-                            .compareTo(s2.getPhoneNumbers().toString());
-                })
-                .toList();
+        List<Subscriber> sorted = new ArrayList<>(subscribers.values());
+
+        Collections.sort(sorted, new Comparator<Subscriber>() {
+            @Override
+            public int compare(Subscriber s1, Subscriber s2) {
+                // Сравниваем по полному имени
+                int nameCompare = s1.getFullName().compareTo(s2.getFullName());
+                if (nameCompare != 0) return nameCompare;
+
+                // При одинаковых именах сравниваем по телефонам
+                List<String> phones1 = s1.getPhoneNumbers();
+                List<String> phones2 = s2.getPhoneNumbers();
+                return phones1.toString().compareTo(phones2.toString());
+            }
+        });
+
+        return sorted;
     }
 }
 

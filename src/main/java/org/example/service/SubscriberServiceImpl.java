@@ -8,7 +8,7 @@ import java.util.Optional;
 public class SubscriberServiceImpl implements SubscriberService {
     private final SubscriberRepository repository;
 
-    // Конструктор вместо @RequiredArgsConstructor
+
     public SubscriberServiceImpl(SubscriberRepository repository) {
         this.repository = repository;
     }
@@ -52,7 +52,7 @@ public class SubscriberServiceImpl implements SubscriberService {
     @Override
     public Subscriber addPhoneNumber(Long subscriberId, String phoneNumber) {
         Subscriber subscriber = repository.findById(subscriberId)
-                .orElseThrow(() -> new IllegalArgumentException("Subscriber not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Абонент не найден"));
         subscriber.addPhoneNumber(phoneNumber);
         return repository.save(subscriber);
     }
@@ -60,20 +60,20 @@ public class SubscriberServiceImpl implements SubscriberService {
     @Override
     public Subscriber removePhoneNumber(Long subscriberId, String phoneNumber) {
         Subscriber subscriber = repository.findById(subscriberId)
-                .orElseThrow(() -> new IllegalArgumentException("Subscriber not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Абонент не найден"));
         subscriber.getPhoneNumbers().remove(phoneNumber);
         return repository.save(subscriber);
     }
-
+    //ПРОВЕРЯЕТ бизнес-правила:
     private void validateSubscriber(Subscriber subscriber) {
         if (subscriber.getFirstName() == null || subscriber.getFirstName().trim().isEmpty()) {
-            throw new IllegalArgumentException("First name is required");
+            throw new IllegalArgumentException("Имя обязательно для заполнения");
         }
         if (subscriber.getLastName() == null || subscriber.getLastName().trim().isEmpty()) {
-            throw new IllegalArgumentException("Last name is required");
+            throw new IllegalArgumentException("Фамилия обязательна для заполнения");
         }
         if (subscriber.getPhoneNumbers().size() > 3) {
-            throw new IllegalArgumentException("Cannot have more than 3 phone numbers");
+            throw new IllegalArgumentException("Не может быть больше 3 телефонных номеров");
         }
     }
 }
